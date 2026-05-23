@@ -150,11 +150,20 @@ function copyPix() {
 // Contact form submission
 document.getElementById('contactForm').addEventListener('submit', function (e) {
   e.preventDefault();
+  const subject = this.querySelector('#subject').value;
+
+  if (subject === 'voluntario') {
+    const name = this.querySelector('#name').value;
+    const msg = encodeURIComponent(`Olá! Me chamo ${name} e gostaria de ser voluntário(a) da ONG Arca da Aliança.`);
+    window.open(`https://wa.me/5511974320644?text=${msg}`, '_blank');
+    this.reset();
+    return;
+  }
+
   const btn = this.querySelector('button[type="submit"]');
   btn.textContent = 'Enviando...';
   btn.disabled = true;
 
-  // Simulate form submission
   setTimeout(() => {
     btn.textContent = 'Enviar Mensagem';
     btn.disabled = false;
